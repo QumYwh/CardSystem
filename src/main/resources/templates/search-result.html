@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索结果</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* 调整垂直居中 */
+            height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+        p {
+            text-align: center;
+            color: #777;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>搜索结果</h1>
+    <div th:if="${#lists.isEmpty(cards)}">
+        <p>没有找到任何名片。</p>
+    </div>
+    <div th:unless="${#lists.isEmpty(cards)}">
+        <table>
+            <thead>
+            <tr>
+                
+                <th>姓名</th>
+                <th>电话号码</th>
+                <th>电子邮件</th>
+                <th>公司</th>
+                <th>职位</th>
+                <th>地址</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="card : ${cards}">
+
+                <td th:text="${card?.cardName ?: 'N/A'}"></td>
+                <td th:text="${card?.phonenumber ?: 'N/A'}"></td>
+                <td th:text="${card?.email ?: 'N/A'}"></td>
+                <td th:text="${card?.company ?: 'N/A'}"></td>
+                <td th:text="${card?.job ?: 'N/A'}"></td>
+                <td th:text="${card?.address ?: 'N/A'}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
